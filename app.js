@@ -32,6 +32,8 @@ const { notFoundHandler, errorHandler } = require('./middlewares/errorHandler');
 const mahasiswaRoutes = require('./routes/mahasiswaRoutes');
 const fakultasRoutes = require('./routes/fakultasRoutes');
 const prodiRoutes = require('./routes/prodiRoutes');
+const authRoutes = require('./routes/authRoutes');   // bersama require lainnya
+app.use('/auth', authRoutes);                          // sebelum app.use(notFoundHandler)
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -53,6 +55,7 @@ app.get('/', (req, res) => {
 app.use('/mahasiswa', mahasiswaRoutes);
 app.use('/fakultas', fakultasRoutes);
 app.use('/prodi', prodiRoutes);
+app.use('/auth', authRoutes); // Pastikan ini ada sebelum notFoundHandler
 
 // ---------- Error Handler (Wajib Paling Bawah) ----------
 app.use(notFoundHandler);
